@@ -1,0 +1,15 @@
+.iconTextContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: grey;
+  font-size: 10px;
+}
+
+.iconTextContainer:hover {
+  color: black;
+}
+.iconTextWrapper {
+  display: flex;
+  gap: 16px;
+}
