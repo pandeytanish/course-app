@@ -12,7 +12,7 @@ import Lesson1 from './Lesson1';
 interface Props {
   handleAddData: () => void; 
   handleLesson: () => void;
-  handleDeleteTheme: (themeName: string) => void;
+  handleDeleteTheme: (id: number) => void;
   ThemeData: theme[]
   LessonData: lesson[]
 }
@@ -59,121 +59,183 @@ constructor(props : Props){
     const {handleAddData , ThemeData, handleLesson, LessonData,handleDeleteTheme} = this.props
     return (
       <Box>
-      <Box sx={{ height : 'auto' , width : '80vw', display : 'flex', flexDirection : 'column' ,alignItems: 'center',marginTop : '18px', backgroundColor : '#f4f4f4'}}>
-        <Box sx={{height : '350px', width : '78vw', backgroundColor : 'white', borderRadius : '10px', marginBottom : '10px' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid gray', padding: '6px' , marginBottom : '12px' }}>
-      <Typography variant='h6' sx={{fontWeight : 'normal'}} >Course Information</Typography>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px'}}>
-      <Stack direction="row" spacing={2} alignItems="center">
-      <Stack direction="row" alignItems="center">
-        <StarOutlineIcon />
-        <Typography>10pts</Typography>
-      </Stack>
-      <Stack direction="row"  alignItems="center">
-        <AccessTimeIcon />
-        <Typography>24h 30m</Typography>
-      </Stack>
-    </Stack>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>Active</Typography>
-          <Switch />
+           <Box>
+        <Box sx={{ 
+          height: 'auto', 
+          width: {xs : '100vw', lg : '80vw'} , 
+          display: 'flex', 
+          flexDirection: { xs: 'column', lg: 'column' }, 
+          alignItems: 'center', 
+          marginTop: '18px', 
+          backgroundColor: 'white' 
+        }}>
+          <Box sx={{ 
+            height: 'auto', 
+            width: {xs : '100vw', lg : '78vw'},
+            backgroundColor: 'white', 
+            borderRadius: '10px', 
+            marginBottom: '10px' 
+          }}>
+            <Box sx={{ 
+              display: 'flex', 
+              
+              flexDirection: { xs: 'row', sm: 'row' }, 
+              justifyContent: 'space-between', 
+              borderBottom: '1px solid gray', 
+              padding: '6px', 
+              marginBottom: '12px' ,
+              fontSize : {xs : '10px'}
+            }}>
+              <Typography variant='h6' sx={{ fontWeight: 'normal' }}>Course Information</Typography>
+              <Box sx={{ 
+                display: 'flex', 
+                flexDirection: { xs: 'column', sm: 'row' }, 
+                alignItems: 'center', 
+                gap: '16px' 
+              }}>
+                <Stack direction="row" spacing={2} alignItems="center">
+                  <Stack direction="row" alignItems="center">
+                    <StarOutlineIcon />
+                    <Typography>10pts</Typography>
+                  </Stack>
+                  <Stack direction="row" alignItems="center">
+                    <AccessTimeIcon />
+                    <Typography>24h 30m</Typography>
+                  </Stack>
+                </Stack>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Typography>Active</Typography>
+                  <Switch />
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+          
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: { xs: 'column', lg: 'row' }, 
+            justifyContent: 'space-between' ,
+            width: {xs : '100vw', lg : '78vw'},
+            backgroundColor : 'white'
+          }}>
+            <Box sx={{ 
+              width: {xs : '100vw', lg : '35vw'},
+              padding: '10px', 
+              borderRight: { lg: '1px solid grey' } 
+            }}>
+              <TextField margin='dense' fullWidth label="Course Name" defaultValue='How the Wine is done ?' variant="outlined" />
+              <Stack direction='row' sx={{ 
+                display: 'flex', 
+                gap: '24px', 
+                marginTop: '10px', 
+                flexDirection: { xs: 'column', sm: 'row' } 
+              }}>
+                <TextField sx={{ width: { xs: '100%', sm: '300px' } }} label="Duration" defaultValue='24h 30m' />
+                <TextField sx={{ width: { xs: '100%', sm: '300px' } }} label="LeaderBoard Points" defaultValue='10pts' />
+              </Stack>
+              <Stack direction='row' sx={{ 
+                display: 'flex', 
+                gap: '24px', 
+                marginTop: '10px', 
+                flexDirection: { xs: 'column', sm: 'row' } 
+              }}>
+                <FormControl sx={{ width: { xs: '100%', sm: '300px' } }}>
+                  <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                  <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Category" defaultValue={10}>
+                    <MenuItem value={10}>Wine</MenuItem>
+                    <MenuItem value={20}>Wine</MenuItem>
+                    <MenuItem value={30}>Wine</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ width: { xs: '100%', sm: '300px' } }}>
+                  <InputLabel id="demo-simple-select-label">Level</InputLabel>
+                  <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Level" defaultValue={20}>
+                    <MenuItem value={10}>Easy</MenuItem>
+                    <MenuItem value={20}>Intermediate</MenuItem>
+                    <MenuItem value={30}>Expert</MenuItem>
+                  </Select>
+                </FormControl>
+              </Stack>
+              <FormControl margin='dense' fullWidth>
+                <InputLabel id="demo-simple-select-label">Certificate</InputLabel>
+                <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Certificate" defaultValue={20}>
+                  <MenuItem value={10}>WSET</MenuItem>
+                  <MenuItem value={20}>WSET</MenuItem>
+                  <MenuItem value={30}>WSET</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            
+            <Box sx={{ 
+              width: { xs: '100vw', lg: '42vw' }, 
+              padding: '10px' 
+            }}>
+              <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'left', 
+                flexDirection: { xs: 'column', sm: 'row' } 
+              }}>
+                <CardMedia
+                  component="img"
+                  sx={{ 
+                    height: {xs : '20vh', lg : '110px'}, 
+                    width: {xs : '85vw', lg : '200px'}, 
+                    marginX: '1.5rem', 
+                    marginBottom: '10px' 
+                  }}
+                  image={this.state.image}
+                  alt="Media"
+                />
+                <Stack sx={{marginLeft : {xs :'18px'}}}>
+                  <Typography variant='h6'>Overview Picture</Typography>
+                  <Typography sx={{ fontSize: '12px', color: 'gray' }} variant='body2'>Minimal Resolution 343x193px</Typography>
+                  <Typography sx={{ fontSize: '12px', color: 'gray' }} variant='body2'>Maximum Size: 5mb</Typography>
+                  <Button 
+                    sx={{ borderRadius: '10px', marginTop: '8px', color: 'black', borderColor: 'black' }} 
+                    component="label" 
+                    role={undefined} 
+                    size='small' 
+                    variant="outlined" 
+                    tabIndex={-1} 
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    <input type="file" hidden onChange={this.handleFileChange}/>
+                    Upload file
+                    <VisuallyHiddenInput type="file" />
+                  </Button>
+                </Stack>
+              </Box>
+              <Stack sx={{ marginTop : {xs : '1rem'}}}>
+                <TextField size='small' margin='dense' multiline label="Description" variant="outlined" defaultValue="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, optio molestiae exercitationem iusto sequi," />
+                <TextField size='small' margin='dense' multiline label="Information At Course End" variant="outlined" defaultValue="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, optio molestiae exercitationem iusto sequi," />
+              </Stack>
+            </Box>
+          </Box>
         </Box>
-      </Box>
-    </Box>
-       <Box sx={{ display : 'flex', justifyContent : 'space-between'}}>
-       <Box sx={{width : '35vw' , padding : '10px' , borderRight : '1px solid grey'}}>
-       <TextField margin='dense' fullWidth  label="Course Name" defaultValue='How the Wine is done ?' variant="outlined" />
-       <Stack direction='row' sx={{display : 'flex', gap : '24px', marginTop : '10px'}}>
-        <TextField sx={{width : "300px"}} label="Duration" defaultValue='24h 30m'/>
-        <TextField sx={{width : "300px"}} label="LeaderBoard Points" defaultValue='10pts'/>
-       </Stack>
-       <Stack direction='row' sx={{display : 'flex', gap : '24px', marginTop : '10px'}}>
-        <FormControl sx={{width : '300px'}}>
-       <InputLabel id="demo-simple-select-label">Category</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    label="Category"
-    defaultValue={10}
-  >
-    <MenuItem value={10}>Wine</MenuItem>
-    <MenuItem value={20}>Wine</MenuItem>
-    <MenuItem value={30}>Wine</MenuItem>
-  </Select>
-  </FormControl>
-  <FormControl sx={{width : '300px'}}>
-       <InputLabel id="demo-simple-select-label">Level</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    label="Level"
-    defaultValue={20}
-  >
-    <MenuItem value={10}>Easy</MenuItem>
-    <MenuItem value={20}>Intermediate</MenuItem>
-    <MenuItem value={30}>Expert</MenuItem>
-  </Select>
-  </FormControl>
-       </Stack>
-       <FormControl margin='dense' fullWidth>
-       <InputLabel id="demo-simple-select-label">Certificate</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    label="Certificate"
-    defaultValue={20}
-  >
-    <MenuItem value={10}>WSET</MenuItem>
-    <MenuItem value={20}>WSET</MenuItem>
-    <MenuItem value={30}>WSET</MenuItem>
-  </Select>
-  </FormControl>
-       </Box>
-       <Box sx={{width : '42vw' , padding : '10px'}}>
-        <Box sx={{display: 'flex', justifyContent : 'left',}}>
-        <CardMedia
-         component="img"
-          sx={{height : '110px', width : '200px', marginX : '1.5rem', marginBottom : '10px'}}
-         image={this.state.image}
-        alt="Media"
-       />
-          <Stack>
-            <Typography variant='h6'>Overview Picture</Typography>
-            <Typography sx={{fontSize : '12px' , color : 'gray'}} variant='body2'>Minimal Resolution 343x193px</Typography>
-            <Typography sx={{fontSize : '12px' , color : 'gray'}} variant='body2'>Maximum Size : 5mb</Typography>
-            <Button sx={{borderRadius : '10px', marginTop : '8px', color : 'black', borderColor : 'black'}} component="label" role={undefined} size='small'  variant="outlined" tabIndex={-1} startIcon={<CloudUploadIcon />}>
-            <input type="file" hidden onChange={this.handleFileChange}/>
-            Upload file
-      <VisuallyHiddenInput type="file" />
-    </Button>
-          </Stack>
+        
+        <Box>
+          {ThemeData.map((data, index) => (
+            <div key={index}>
+              <Theme1 handleLesson={handleLesson} handleDeleteTheme={handleDeleteTheme} index={index} />
+              <Box>
+                {LessonData.map((lessonData, lessonIndex) => (
+                  <Lesson1 key={lessonIndex} index={lessonIndex} />
+                ))}
+                <Stack sx={{marginLeft : '2rem'}} spacing={4} direction='row'>
+                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined' onClick={handleLesson}>New Lesson</Button>
+                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined'>Add Lesson</Button>
+                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined'>Add QUIZ</Button>
+                </Stack>
+              </Box>
+            </div>
+          ))}
         </Box>
-
-        <Stack>
-        <TextField size='small' sx={{}} margin='dense' multiline  label="Description" variant="outlined" defaultValue="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, optio molestiae exercitationem iusto sequi," />
-        <TextField size='small' margin='dense' multiline  label="Information At Course End" variant="outlined" defaultValue="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, optio molestiae exercitationem iusto sequi," />
+        <Stack sx={{marginTop : '10px'}} direction='row' spacing={2}>
+        <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined' onClick={handleAddData}>New Theme</Button>
+        <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined' >New Mock Exam</Button>
         </Stack>
-       </Box>
-        </Box>
-
-        </Box>
-     <Box>
-     {ThemeData.map((Data,index) => (
-      <>
-      <Theme1 theme={Data} handleDeleteTheme={handleDeleteTheme} index={index} />
-      <Box>
-      {LessonData.map((Data,index) => (
-        <Lesson1 index={index}/>
-      ))}
-    </Box>
-    </>
-     ))}
-    
-  </Box>
- 
       </Box>
-  <Button size='small' sx={{borderColor : 'black', color : 'black', borderRadius :'16px', left : "1.5rem",marginLeft : '10px'}} variant='outlined' onClick={handleAddData}>New Theme</Button>
-  <Button size='small' sx={{borderColor : 'black', color : 'black', borderRadius :'16px', left : "1.5rem",marginLeft : '10px'}} variant='outlined' onClick={handleLesson}>New Lesson</Button>
+  
 
       </Box>
     )

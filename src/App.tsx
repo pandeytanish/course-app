@@ -6,7 +6,7 @@ import UpperNavBar from './Components/UpperNavBar';
 
 function App() {
   return (
-    <div style={{backgroundColor : '#f4f4f4'}}>
+    <div style={{}}>
       {/* <UpperNavBar/> */}
       {/* <NavBar/> */}
       <Main/>

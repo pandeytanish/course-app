@@ -35,6 +35,14 @@ export default class Main extends Component<{},State> {
      
     }
 
+    handleDeleteTheme = (id:number) =>{
+        const {ThemeData} = this.state
+        let new_courses_themes = ThemeData.filter((_,index)=>{
+          return index !== id
+        })
+        this.setState({ThemeData:[...new_courses_themes]})
+      }
+
     //   handleThemeDelete = (id : number) => {
     //     const {ThemeData} = this.state
     //     const deleteTheme = ThemeData.filter((data,index) => {
@@ -43,12 +51,12 @@ export default class Main extends Component<{},State> {
     //     this.setState({ThemeData:[...deleteTheme]})
     //   }
       
-    handleDeleteTheme = (themeName: string) => {
-        this.setState(prevState => ({
-            ThemeData: prevState.ThemeData.filter(theme => theme.name !== themeName)
-        }));
-        console.log("Theme Deleted");
-    }
+    // handleDeleteTheme = (themeName: string) => {
+    //     this.setState(prevState => ({
+    //         ThemeData: prevState.ThemeData.filter(theme => theme.name !== themeName)
+    //     }));
+    //     console.log("Theme Deleted");
+    // }
 
       handleLesson = () => {
         const {LessonData,Lesson} = this.state
@@ -58,9 +66,10 @@ export default class Main extends Component<{},State> {
   render() {
     return (
       <>
-      <div style={ {display : 'flex', justifyContent : 'space-around',backgroundColor : '#f4f4f4', width : '99%'}}>
+      {/* ,backgroundColor : '#f4f4f4 */}
+      <div style={ {display : 'flex', justifyContent : 'space-around', width : '100%'}}>
       <SideBar handleLesson={this.handleLesson} handleAddData={this.handleAddData} LessonData={this.state.LessonData} ThemeData={this.state.ThemeData}/>
-      <CourseInformation handleDeleteTheme={this.handleDeleteTheme} handleLesson={this.handleLesson} handleAddData={this.handleAddData} LessonData={this.state.LessonData} ThemeData={this.state.ThemeData}  />
+      <CourseInformation handleDeleteTheme={this.handleDeleteTheme}  handleLesson={this.handleLesson} handleAddData={this.handleAddData} LessonData={this.state.LessonData} ThemeData={this.state.ThemeData}  />
      
       </div>
       </>

@@ -87,7 +87,7 @@ export default class SideBar extends Component<Props, SideBarState> {
         // console.log(AllData)
 
         return (
-            <Box sx={{ p: 3, borderRight: '1px solid #ddd', width: '14vw', height: '74vh', display: { sm : 'none' , lg : 'flex'}, flexDirection: 'column', justifyContent: 'space-between', backgroundColor: '#f7f7f7', boxShadow: '2px 0 5px rgba(0,0,0,0.1)' }}>
+            <Box sx={{ p: 3, borderRight: '1px solid #ddd', width: '14vw', height: '74vh', display: { xs : 'none' , lg : 'flex'}, flexDirection: 'column', justifyContent: 'space-between', backgroundColor: '#f7f7f7', boxShadow: '2px 0 5px rgba(0,0,0,0.1)' }}>
                 <Box sx={{ textAlign: 'left', flex: 1 }}>
                     <Typography variant='h5' sx={{ marginBottom: '20px' }}>Courses</Typography>
                     <Typography sx={{ fontSize: '14px', color: 'gray', marginBottom: '10px' }} variant='body2'>How the wine is Done</Typography>

@@ -44,65 +44,144 @@ export default class Lesson1 extends Component<Props,State> {
   }
   render() {
     return (
-     <Box sx={{height : '550px',width : '76vw',backgroundColor : '#f4f4f4', display : 'flex',justifyContent : 'center',alignContent : 'center', marginLeft: '2rem'}}>
-      <Box sx={{width : '78vw',backgroundColor : 'white',height : '500px', borderRadius : '10px'}}>
-               <Box sx={{padding : '10px'}} display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="h6">Lesson  {this.props.index+1}</Typography>
-        <Box display="flex" alignItems="center" gap={1}>
-          <Typography variant="body1">5 pts</Typography>
-          <IconButton aria-label="delete">
-            <Button>Delete Theme <DeleteIcon color="error" /></Button>
-          </IconButton>
+      <Box 
+      sx={{
+        height: {xs : '105vh',lg : '550px'},
+        width: { xs: '100%', sm: '90vw', md: '76vw' },
+        backgroundColor: '',
+        display: 'flex',
+        justifyContent: 'center',
+        alignContent: 'center',
+        marginLeft: { xs: 0, md: '2rem' },
+        marginBottom : {xs : '0rem', lg : '0px'}
+      }}
+    >
+      <Box 
+        sx={{
+          width: { xs: '95vw', sm: '85vw', md: '78vw' },
+          backgroundColor: 'white',
+          height: '500px',
+          borderRadius: '10px'
+        }}
+      >
+        <Box 
+          sx={{ padding: '10px' }} 
+          display="flex" 
+          justifyContent="space-between" 
+          alignItems="center"
+        >
+          <Typography variant="h6">Lesson {this.props.index + 1}</Typography>
+          <Box display="flex" alignItems="center" gap={1}>
+            <Typography variant="body1">5 pts</Typography>
+            <IconButton aria-label="delete">
+              <Button>
+                Delete Theme 
+                <DeleteIcon color="error" />
+              </Button>
+            </IconButton>
+          </Box>
         </Box>
-      </Box>
-      <Box sx={{display : 'flex', justifyContent : 'space-between'}}>
-        <Box sx={{ width : '35vw', height : '400px', padding : '10px',}}>
-            <TextField sx={{marginY : '12px'}} margin='dense' fullWidth label='Title' defaultValue='Planting the grapes'/>
-            <Stack spacing={2}  direction='row'>
-            <TextField  sx={{marginY : '12px'}}  margin='dense' fullWidth label='Leaderboard Points' defaultValue='5'/>
-            <TextField  sx={{marginY : '12px'}}  margin='dense' fullWidth  defaultValue='Order In The Theme'/>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between' }}>
+          <Box 
+            sx={{ 
+              width: { xs: '100%', md: '35vw' }, 
+              height: '400px', 
+              padding: '10px' 
+            }}
+          >
+            <TextField 
+              sx={{ marginY: '12px' }} 
+              margin='dense' 
+              fullWidth 
+              label='Title' 
+              defaultValue='Planting the grapes'
+            />
+            <Stack spacing={2} direction='row'>
+              <TextField 
+                sx={{ marginY: '12px' }} 
+                margin='dense' 
+                fullWidth 
+                label='Leaderboard Points' 
+                defaultValue='5'
+              />
+              <TextField 
+                sx={{ marginY: '12px' }} 
+                margin='dense' 
+                fullWidth 
+                defaultValue='Order In The Theme'
+              />
             </Stack>
-            <FormControl  sx={{marginY : '12px'}}  fullWidth>
-  <InputLabel id="demo-simple-select-label">Product Type</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    label="Product Type"
-    value={10} >
-    <MenuItem value={10}>Free</MenuItem>
-    <MenuItem value={20}>Paid</MenuItem>
-  </Select>
-</FormControl>
-<Box sx={{marginLeft : '2rem',padding : '20px'}} display="flex"  gap={4}>
-<CardMedia
-         component="img"
-          sx={{height : '110px', width : '200px', marginX : '1rem', marginBottom : '10px'}}
-         image={this.state.image}
-        alt="Media"
-       />
-        <Box >
-            <Typography variant='h6'>Heading Media</Typography>
-            <Typography variant='body2'>(picture,audio,video)</Typography>
-            <Typography variant='body2'>Minimal Resolution : 343x193px</Typography>
-            <Button sx={{borderRadius : '10px', marginTop : '8px', color : 'black', borderColor : 'black'}} component="label" role={undefined} size='small'  variant="outlined" tabIndex={-1} startIcon={<CloudUploadIcon />}>
-            <input type="file" hidden onChange={this.handleFileChange}/>
-            Upload file
-      <VisuallyHiddenInput type="file" />
-    </Button>
+            <FormControl sx={{ marginY: '12px' }} fullWidth>
+              <InputLabel id="demo-simple-select-label">Product Type</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Product Type"
+                value={10}
+              >
+                <MenuItem value={10}>Free</MenuItem>
+                <MenuItem value={20}>Paid</MenuItem>
+              </Select>
+            </FormControl>
+            <Box 
+              sx={{ 
+                marginLeft: { xs: 0, md: '2rem' }, 
+                padding: '20px' 
+              }} 
+              display="flex" 
+              gap={4}
+            >
+              <CardMedia
+                component="img"
+                sx={{ height: '110px', width: '100px', marginX: '1rem', marginBottom: '10px' }}
+                image={this.state.image}
+                alt="Media"
+              />
+              <Box>
+                <Typography variant='h6'>Heading Media</Typography>
+                <Typography variant='body2'>(picture, audio, video)</Typography>
+                <Typography variant='body2'>Minimal Resolution: 343x193px</Typography>
+                <Button 
+                  sx={{ borderRadius: '10px', marginTop: '8px', color: 'black', borderColor: 'black' }} 
+                  component="label" 
+                  role={undefined} 
+                  size='small' 
+                  variant="outlined" 
+                  tabIndex={-1} 
+                  startIcon={<CloudUploadIcon />}
+                >
+                  <input type="file" hidden onChange={this.handleFileChange} />
+                  Upload file
+                  <VisuallyHiddenInput type="file" />
+                </Button>
+              </Box>
+            </Box>
+          </Box>
+          <Box 
+            sx={{ 
+              border: '1px solid grey', 
+              marginTop : {xs : '2rem', lg : '0px'},
+              borderRadius: '10px', 
+              marginRight: { xs: 0, md: '10px' }
+            }}
+          >
+            <Box 
+              sx={{ 
+                width: { xs: '100%', md: '35vw' }, 
+                height: {xs : '200px', lg : '400px'}, 
+                padding: '10px' 
+              }}
+            >
+              <Typography variant='body1'>Lesson Content</Typography>
+              <ThemeProvider theme={myTheme}>
+                <MUIRichTextEditor label="Start typing..." />
+              </ThemeProvider>
+            </Box>
+          </Box>
         </Box>
       </Box>
-        </Box>
-         <Box sx={{border : '1px solid grey', borderRadius : '10px',marginRight :'10px'}}>
-        <Box sx={{width : '35vw', height : '400px' , padding : '10px'}}>
-         <Typography variant='body1'>Lesson Content</Typography>
-    <ThemeProvider theme={myTheme}>
-        <MUIRichTextEditor label="Start typing..." />
-    </ThemeProvider>
-        </Box>
-         </Box>
-      </Box>
-      </Box>
-     </Box>
+    </Box>
+    
     )
   }
 }
