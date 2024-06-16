@@ -10,7 +10,8 @@ const myTheme = createTheme({
 })
 
 interface Props {
-  index : number
+  theme_index : number
+  lesson_index : number
 }
 
 interface State {
@@ -43,8 +44,10 @@ export default class Lesson1 extends Component<Props,State> {
       }
   }
   render() {
+    const {theme_index, lesson_index} = this.props
     return (
       <Box 
+      key={lesson_index}
       sx={{
         height: {xs : '105vh',lg : '550px'},
         width: { xs: '100%', sm: '90vw', md: '76vw' },
@@ -70,7 +73,7 @@ export default class Lesson1 extends Component<Props,State> {
           justifyContent="space-between" 
           alignItems="center"
         >
-          <Typography variant="h6">Lesson {this.props.index + 1}</Typography>
+          <Typography variant="h6">Lesson {lesson_index + 1}</Typography>
           <Box display="flex" alignItems="center" gap={1}>
             <Typography variant="body1">5 pts</Typography>
             <IconButton aria-label="delete">

@@ -5,13 +5,14 @@ import { Component } from 'react';
 
 interface Props {
     handleAddData: () => void;
-    handleLesson: () => void;
+    handleLesson: (id: number) => void;
     ThemeData: theme[]
-    LessonData: lesson[]
+   
 }
 
 interface theme {
     name: string
+    LessonData: lesson[]
 }
 
 interface lesson {
@@ -83,7 +84,7 @@ export default class SideBar extends Component<Props, SideBarState> {
 
     render() {
         const { openSections } = this.state;
-        const { handleAddData, ThemeData, LessonData, handleLesson } = this.props
+        const { handleAddData, ThemeData, handleLesson } = this.props
         // console.log(AllData)
 
         return (
@@ -97,7 +98,7 @@ export default class SideBar extends Component<Props, SideBarState> {
                             <>
                                 <Typography onClick={() => this.handleBox('Theme1')} variant='h6' sx={{ cursor: 'pointer', marginBottom: '10px', '&:hover': { color: 'primary.main' } }}>Theme {index + 1}</Typography>
                                 <Typography sx={{ fontSize: '14px', color: 'gray', marginBottom: '10px' }} variant='body2'>Planting A Grapes</Typography>
-                                {LessonData.map((data,index) => (
+                                {Data.LessonData.map((data,index) => (
                                     <Box>
                                         {openSections.Theme1 && (
                                             <Box sx={{ paddingLeft: '16px', marginBottom: '10px' }}>

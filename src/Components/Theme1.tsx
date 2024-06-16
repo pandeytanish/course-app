@@ -4,9 +4,9 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import React, { ChangeEvent, Component } from 'react'
 
 interface Props {
-  index : number
+  theme_index : number
   handleDeleteTheme: (id:number) => void;
-  handleLesson: () => void;
+  handleLesson: (id: number) => void;
 }
 
 interface State {
@@ -39,7 +39,7 @@ export default class Theme1 extends Component<Props,State> {
       }
   }
   render() {
-    const {handleDeleteTheme,index} = this.props
+    const {handleDeleteTheme,theme_index} = this.props
     return (
       <Box 
       sx={{ 
@@ -67,11 +67,11 @@ export default class Theme1 extends Component<Props,State> {
           justifyContent="space-between" 
           alignItems="center"
         >
-          <Typography variant="h6">Theme {index + 1}</Typography>
+          <Typography variant="h6">Theme {theme_index + 1}</Typography>
           <Box display="flex" alignItems="center" gap={1}>
             <Typography variant="body1">5 pts</Typography>
             <IconButton aria-label="delete">
-              <Button onClick={()=>handleDeleteTheme(index)}>Delete Theme <DeleteIcon color="error" /></Button>
+              <Button onClick={()=>handleDeleteTheme(theme_index)}>Delete Theme <DeleteIcon color="error" /></Button>
             </IconButton>
           </Box>
         </Box>

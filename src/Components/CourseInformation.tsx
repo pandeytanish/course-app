@@ -11,14 +11,15 @@ import Lesson1 from './Lesson1';
 
 interface Props {
   handleAddData: () => void; 
-  handleLesson: () => void;
+  handleLesson: (id: number) => void;
   handleDeleteTheme: (id: number) => void;
   ThemeData: theme[]
-  LessonData: lesson[]
+ 
 }
 
 interface theme {
   name : string
+  LessonData: lesson[]
 }
 
 interface lesson {
@@ -56,7 +57,7 @@ constructor(props : Props){
 }
 
   render() {
-    const {handleAddData , ThemeData, handleLesson, LessonData,handleDeleteTheme} = this.props
+    const {handleAddData , ThemeData, handleLesson ,handleDeleteTheme} = this.props
     return (
       <Box>
            <Box>
@@ -214,17 +215,17 @@ constructor(props : Props){
         </Box>
         
         <Box>
-          {ThemeData.map((data, index) => (
-            <div key={index}>
-              <Theme1 handleLesson={handleLesson} handleDeleteTheme={handleDeleteTheme} index={index} />
+          {ThemeData.map((theme, theme_index) => (
+            <div key={theme_index}>
+              <Theme1 handleLesson={handleLesson} handleDeleteTheme={handleDeleteTheme}  theme_index={theme_index} />
               <Box>
-                {LessonData.map((lessonData, lessonIndex) => (
-                  <Lesson1 key={lessonIndex} index={lessonIndex} />
+                {theme.LessonData.map((lessonData, lesson_index) => (
+                  <Lesson1 key={lesson_index}  theme_index={theme_index} lesson_index={lesson_index} />
                 ))}
                 <Stack sx={{marginLeft : '2rem'}} spacing={4} direction='row'>
-                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined' onClick={handleLesson}>New Lesson</Button>
-                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined'>Add Lesson</Button>
-                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined'>Add QUIZ</Button>
+                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined' onClick={() => handleLesson(theme_index)}>New Lesson</Button>
+                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined'>Add Quiz</Button>
+                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined'>Add FlashCard</Button>
                 </Stack>
               </Box>
             </div>

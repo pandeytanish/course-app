@@ -6,10 +6,11 @@ interface State {
     DataFirst : theme,
     ThemeData : theme[],
     Lesson : lesson
-    LessonData : lesson[]
+    
 } 
 interface theme {
     name : string
+    LessonData : lesson[]
 }
 interface lesson {
     name : string
@@ -20,8 +21,8 @@ export default class Main extends Component<{},State> {
         this.state = {
             DataFirst : {
                 name : 'Theme',
+                LessonData : []
             },
-            LessonData : [],
             ThemeData : [],
             Lesson : {
                 name : 'Lesson'
@@ -43,33 +44,31 @@ export default class Main extends Component<{},State> {
         this.setState({ThemeData:[...new_courses_themes]})
       }
 
-    //   handleThemeDelete = (id : number) => {
-    //     const {ThemeData} = this.state
-    //     const deleteTheme = ThemeData.filter((data,index) => {
-    //         return index !== id
-    //     })
-    //     this.setState({ThemeData:[...deleteTheme]})
-    //   }
+      handleLesson = (id: number) => {
+        console.log("lesson function clicked")
+        const { ThemeData, Lesson } = this.state;
       
-    // handleDeleteTheme = (themeName: string) => {
-    //     this.setState(prevState => ({
-    //         ThemeData: prevState.ThemeData.filter(theme => theme.name !== themeName)
-    //     }));
-    //     console.log("Theme Deleted");
-    // }
-
-      handleLesson = () => {
-        const {LessonData,Lesson} = this.state
-        this.setState({LessonData:[...LessonData,Lesson]})
-        console.log("Lesson Added")
+        if (id >= 0 && id < ThemeData.length) {
+          const updatedCourseThemes = [...ThemeData];
+          const updatedTheme = { ...updatedCourseThemes[id] };
+          updatedTheme.LessonData = [...updatedTheme.LessonData, Lesson];
+          updatedCourseThemes[id] = updatedTheme;
+          this.setState({ ThemeData: updatedCourseThemes });
+        }
       }
+ 
+      // handleLesson = () => {
+      //   const {LessonData,Lesson} = this.state
+      //   this.setState({LessonData:[...LessonData,Lesson]})
+      //   console.log("Lesson Added")
+      // }
   render() {
     return (
       <>
       {/* ,backgroundColor : '#f4f4f4 */}
       <div style={ {display : 'flex', justifyContent : 'space-around', width : '100%'}}>
-      <SideBar handleLesson={this.handleLesson} handleAddData={this.handleAddData} LessonData={this.state.LessonData} ThemeData={this.state.ThemeData}/>
-      <CourseInformation handleDeleteTheme={this.handleDeleteTheme}  handleLesson={this.handleLesson} handleAddData={this.handleAddData} LessonData={this.state.LessonData} ThemeData={this.state.ThemeData}  />
+      <SideBar handleLesson={this.handleLesson} handleAddData={this.handleAddData} ThemeData={this.state.ThemeData}/>
+      <CourseInformation handleDeleteTheme={this.handleDeleteTheme}  handleLesson={this.handleLesson} handleAddData={this.handleAddData}  ThemeData={this.state.ThemeData}  />
      
       </div>
       </>
