@@ -29,7 +29,7 @@ export default class Main extends Component<{},State> {
             }
         }
     }
-    handleAddData = () => {
+    handleAddTheme = () => {
         const {ThemeData,DataFirst} = this.state
         this.setState({ThemeData:[...ThemeData,DataFirst]})
         console.log("Theme Added")
@@ -42,10 +42,11 @@ export default class Main extends Component<{},State> {
           return index !== id
         })
         this.setState({ThemeData:[...new_courses_themes]})
+        console.log(`theme ${id + 1} Deleted`)
       }
 
-      handleLesson = (id: number) => {
-        console.log("lesson function clicked")
+      handleAddLesson = (id: number) => {
+        console.log(`lesson added `)
         const { ThemeData, Lesson } = this.state;
       
         if (id >= 0 && id < ThemeData.length) {
@@ -56,19 +57,31 @@ export default class Main extends Component<{},State> {
           this.setState({ ThemeData: updatedCourseThemes });
         }
       }
- 
-      // handleLesson = () => {
-      //   const {LessonData,Lesson} = this.state
-      //   this.setState({LessonData:[...LessonData,Lesson]})
-      //   console.log("Lesson Added")
-      // }
+
+      handleDeleteLesson = (themeId: number, lessonIndex: number) => {
+        console.log(`lesson ${lessonIndex + 1} in theme ${themeId + 1} deleted`);
+        const { ThemeData } = this.state;
+      
+        if (themeId >= 0 && themeId < ThemeData.length) {
+          const updatedCourseThemes = [...ThemeData];
+          const updatedTheme = { ...updatedCourseThemes[themeId] };
+      
+          if (lessonIndex >= 0 && lessonIndex < updatedTheme.LessonData.length) {
+            updatedTheme.LessonData.splice(lessonIndex, 1);
+            updatedCourseThemes[themeId] = updatedTheme;
+            this.setState({ ThemeData: updatedCourseThemes });
+          }
+        }
+      }
+    
+  
   render() {
     return (
       <>
-      {/* ,backgroundColor : '#f4f4f4 */}
-      <div style={ {display : 'flex', justifyContent : 'space-around', width : '100%'}}>
-      <SideBar handleLesson={this.handleLesson} handleAddData={this.handleAddData} ThemeData={this.state.ThemeData}/>
-      <CourseInformation handleDeleteTheme={this.handleDeleteTheme}  handleLesson={this.handleLesson} handleAddData={this.handleAddData}  ThemeData={this.state.ThemeData}  />
+      
+      <div style={ {display : 'flex', justifyContent : 'space-around', width : '100%', backgroundColor : '#f4f4f4', }}>
+      <SideBar handleAddLesson={this.handleAddLesson} handleAddTheme={this.handleAddTheme} ThemeData={this.state.ThemeData}/>
+      <CourseInformation handleDeleteLesson={this.handleDeleteLesson} handleDeleteTheme={this.handleDeleteTheme}  handleAddLesson={this.handleAddLesson} handleAddTheme={this.handleAddTheme}  ThemeData={this.state.ThemeData}  />
      
       </div>
       </>

@@ -1,18 +1,20 @@
-import { Box, Button, CardMedia, FormControl, Grid, InputLabel, MenuItem, Select, Stack, TextField, Typography, styled } from '@mui/material'
+import { Box, Button, CardMedia, Divider, FormControl, Grid, InputLabel, MenuItem, Select, Stack, TextField, Typography, styled } from '@mui/material'
 import { ChangeEvent, Component } from 'react'
 import Switch from '@mui/material/Switch';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import Theme1 from './Theme1';
-import Lesson1 from './Lesson1';
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import Theme1 from './Theme';
+import Lesson1 from './Lesson';
 
 
 
 interface Props {
-  handleAddData: () => void; 
-  handleLesson: (id: number) => void;
+  handleAddTheme: () => void; 
+  handleAddLesson: (id: number) => void;
   handleDeleteTheme: (id: number) => void;
+  handleDeleteLesson: (themeId: number, lessonIndex: number) => void;
   ThemeData: theme[]
  
 }
@@ -57,24 +59,29 @@ constructor(props : Props){
 }
 
   render() {
-    const {handleAddData , ThemeData, handleLesson ,handleDeleteTheme} = this.props
+    const {handleAddTheme , ThemeData, handleAddLesson ,handleDeleteTheme, handleDeleteLesson} = this.props
     return (
-      <Box>
-           <Box>
+      <Box sx={{width : '78vw'}}>
+           <Box sx={{height : 'auto', padding : '1rem'}}>
         <Box sx={{ 
           height: 'auto', 
-          width: {xs : '100vw', lg : '80vw'} , 
+          width: {xs : '100vw', lg : '76vw'} , 
           display: 'flex', 
           flexDirection: { xs: 'column', lg: 'column' }, 
           alignItems: 'center', 
           marginTop: '18px', 
-          backgroundColor: 'white' 
+          backgroundColor: 'white' ,
+          // border : '1px solid green',
+          borderRadius : '20px',
+          boxShadow: '5px 5px  rgba(0,0,0,0.1)'
+
         }}>
+           
           <Box sx={{ 
             height: 'auto', 
-            width: {xs : '100vw', lg : '78vw'},
-            backgroundColor: 'white', 
-            borderRadius: '10px', 
+            width: {xs : '100vw', lg : '76vw'},
+            backgroundColor: 'transparent', 
+            // borderRadius: '10px', 
             marginBottom: '10px' 
           }}>
             <Box sx={{ 
@@ -83,7 +90,7 @@ constructor(props : Props){
               flexDirection: { xs: 'row', sm: 'row' }, 
               justifyContent: 'space-between', 
               borderBottom: '1px solid gray', 
-              padding: '6px', 
+              padding: '12px', 
               marginBottom: '12px' ,
               fontSize : {xs : '10px'}
             }}>
@@ -92,7 +99,8 @@ constructor(props : Props){
                 display: 'flex', 
                 flexDirection: { xs: 'column', sm: 'row' }, 
                 alignItems: 'center', 
-                gap: '16px' 
+                gap: '16px' ,
+                
               }}>
                 <Stack direction="row" spacing={2} alignItems="center">
                   <Stack direction="row" alignItems="center">
@@ -116,8 +124,9 @@ constructor(props : Props){
             display: 'flex', 
             flexDirection: { xs: 'column', lg: 'row' }, 
             justifyContent: 'space-between' ,
-            width: {xs : '100vw', lg : '78vw'},
-            backgroundColor : 'white'
+            width: {xs : '100vw', lg : '76vw'},
+            backgroundColor : 'transparent',
+            borderRadius : '20px'
           }}>
             <Box sx={{ 
               width: {xs : '100vw', lg : '35vw'},
@@ -217,23 +226,29 @@ constructor(props : Props){
         <Box>
           {ThemeData.map((theme, theme_index) => (
             <div key={theme_index}>
-              <Theme1 handleLesson={handleLesson} handleDeleteTheme={handleDeleteTheme}  theme_index={theme_index} />
+              <Theme1 handleAddLesson={handleAddLesson} handleDeleteTheme={handleDeleteTheme}  theme_index={theme_index} />
               <Box>
                 {theme.LessonData.map((lessonData, lesson_index) => (
-                  <Lesson1 key={lesson_index}  theme_index={theme_index} lesson_index={lesson_index} />
+                  <Lesson1 handleDeleteLesson={handleDeleteLesson} key={lesson_index}  theme_index={theme_index} lesson_index={lesson_index} />
                 ))}
                 <Stack sx={{marginLeft : '2rem'}} spacing={4} direction='row'>
-                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined' onClick={() => handleLesson(theme_index)}>New Lesson</Button>
-                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined'>Add Quiz</Button>
-                  <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined'>Add FlashCard</Button>
+                  <Button size="small" variant="contained" sx={{color: "black",bgcolor: "white",borderRadius: '20px'}}
+                    startIcon={<AddCircleOutlineOutlinedIcon />}   onClick={() => handleAddLesson(theme_index)}>New Lesson</Button>
+                  <Button size="small" variant="contained" sx={{color: "black",bgcolor: "white",borderRadius: '20px'}}
+                    startIcon={<AddCircleOutlineOutlinedIcon />}  >Add Quiz</Button>
+                  <Button size="small" variant="contained" sx={{color: "black",bgcolor: "white",borderRadius: '20px'}}
+                    startIcon={<AddCircleOutlineOutlinedIcon />} >Add FlashCard</Button>
+                
                 </Stack>
               </Box>
             </div>
           ))}
         </Box>
-        <Stack sx={{marginTop : '10px'}} direction='row' spacing={2}>
-        <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined' onClick={handleAddData}>New Theme</Button>
-        <Button size='small' sx={{ borderColor: 'black', color: 'black', borderRadius: '16px', marginLeft: '10px' }} variant='outlined' >New Mock Exam</Button>
+        <Stack sx={{marginTop : '16px'}} direction='row' spacing={2}>
+        <Button size="small" variant="contained" sx={{color: "black",bgcolor: "white",borderRadius: '20px'}}
+         startIcon={<AddCircleOutlineOutlinedIcon />}onClick={handleAddTheme}>New Theme</Button>
+        <Button size="small" variant="contained" sx={{color: "black",bgcolor: "white",borderRadius: '20px'}}
+        startIcon={<AddCircleOutlineOutlinedIcon />} >New Mock Exam</Button>
         </Stack>
       </Box>
   

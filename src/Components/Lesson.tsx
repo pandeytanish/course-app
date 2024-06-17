@@ -3,6 +3,7 @@ import React, { ChangeEvent, Component } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import MUIRichTextEditor from 'mui-rte';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
 
 const myTheme = createTheme({
@@ -12,6 +13,7 @@ const myTheme = createTheme({
 interface Props {
   theme_index : number
   lesson_index : number
+  handleDeleteLesson: (themeId: number, lessonIndex: number) => void;
 }
 
 interface State {
@@ -34,7 +36,7 @@ export default class Lesson1 extends Component<Props,State> {
   constructor(props : Props){
     super(props);
     this.state = {
-      image : 'https://via.placeholder.com/'
+      image : 'https://via.placeholder.com/343x193'
     }
   }
     handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,41 +46,45 @@ export default class Lesson1 extends Component<Props,State> {
       }
   }
   render() {
-    const {theme_index, lesson_index} = this.props
+    const {theme_index, lesson_index,handleDeleteLesson} = this.props
     return (
       <Box 
       key={lesson_index}
       sx={{
-        height: {xs : '105vh',lg : '550px'},
-        width: { xs: '100%', sm: '90vw', md: '76vw' },
-        backgroundColor: '',
+        height: {xs : '105vh',lg : '500px'},
+        width: { xs: '100%', sm: '90vw', md: '74vw' },
+        backgroundColor: 'white',
         display: 'flex',
         justifyContent: 'center',
         alignContent: 'center',
         marginLeft: { xs: 0, md: '2rem' },
-        marginBottom : {xs : '0rem', lg : '0px'}
+        marginBottom : {xs : '0rem', lg : '16px'},
+        borderRadius : '20px',
+        boxShadow: '5px 5px  rgba(0,0,0,0.1)',
       }}
     >
       <Box 
         sx={{
-          width: { xs: '95vw', sm: '85vw', md: '78vw' },
+          width: { xs: '95vw', sm: '85vw', md: '74vw' },
           backgroundColor: 'white',
           height: '500px',
           borderRadius: '10px'
         }}
       >
         <Box 
-          sx={{ padding: '10px' }} 
+          sx={{ padding: '20px',borderBottom : '1px solid grey', height : '24px', marginBottom : '10px' }} 
           display="flex" 
           justifyContent="space-between" 
           alignItems="center"
+          
         >
           <Typography variant="h6">Lesson {lesson_index + 1}</Typography>
           <Box display="flex" alignItems="center" gap={1}>
+            <StarOutlineIcon/>
             <Typography variant="body1">5 pts</Typography>
             <IconButton aria-label="delete">
-              <Button>
-                Delete Theme 
+              <Button color="error" size='small' variant='outlined' sx={{borderRadius : '10px'}} onClick={()=>handleDeleteLesson(theme_index,lesson_index)}>
+                Delete Lesson
                 <DeleteIcon color="error" />
               </Button>
             </IconButton>
@@ -87,9 +93,10 @@ export default class Lesson1 extends Component<Props,State> {
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between' }}>
           <Box 
             sx={{ 
-              width: { xs: '100%', md: '35vw' }, 
+              width: { xs: '100%', md: '36vw' }, 
               height: '400px', 
-              padding: '10px' 
+              padding: '12px' ,
+              borderRight : '1px solid grey'
             }}
           >
             <TextField 
@@ -136,14 +143,14 @@ export default class Lesson1 extends Component<Props,State> {
             >
               <CardMedia
                 component="img"
-                sx={{ height: '110px', width: '100px', marginX: '1rem', marginBottom: '10px' }}
+                sx={{ height: '120px', width: '200px', marginX: '1rem', marginBottom: '10px' }}
                 image={this.state.image}
                 alt="Media"
               />
               <Box>
                 <Typography variant='h6'>Heading Media</Typography>
-                <Typography variant='body2'>(picture, audio, video)</Typography>
-                <Typography variant='body2'>Minimal Resolution: 343x193px</Typography>
+                <Typography sx={{color : 'grey'}} variant='body2'>(picture, audio, video)</Typography>
+                <Typography sx={{color : 'grey'}} variant='body2'>Minimal Resolution: 343x193px</Typography>
                 <Button 
                   sx={{ borderRadius: '10px', marginTop: '8px', color: 'black', borderColor: 'black' }} 
                   component="label" 
@@ -163,16 +170,19 @@ export default class Lesson1 extends Component<Props,State> {
           <Box 
             sx={{ 
               border: '1px solid grey', 
+              height : '380px',
               marginTop : {xs : '2rem', lg : '0px'},
               borderRadius: '10px', 
-              marginRight: { xs: 0, md: '10px' }
+              marginRight: { xs: 0, md: '10px' },
+               
             }}
           >
             <Box 
               sx={{ 
                 width: { xs: '100%', md: '35vw' }, 
                 height: {xs : '200px', lg : '400px'}, 
-                padding: '10px' 
+                padding: '10px' ,
+               
               }}
             >
               <Typography variant='body1'>Lesson Content</Typography>

@@ -1,12 +1,13 @@
 import { Box, Card, CardMedia, Typography, TextField, Select, MenuItem, Button, IconButton, InputLabel, FormControl, Stack, styled } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import React, { ChangeEvent, Component } from 'react'
 
 interface Props {
   theme_index : number
   handleDeleteTheme: (id:number) => void;
-  handleLesson: (id: number) => void;
+  handleAddLesson: (id: number) => void;
 }
 
 interface State {
@@ -32,6 +33,7 @@ export default class Theme1 extends Component<Props,State> {
       image : 'https://via.placeholder.com/343x193'
     }
   }
+  
     handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files[0]) {
           const file = e.target.files[0]; 
@@ -43,35 +45,40 @@ export default class Theme1 extends Component<Props,State> {
     return (
       <Box 
       sx={{ 
-        height: { xs: 'auto', md: '350px' }, 
+        height: { xs: 'auto', md: '320px' }, 
         width: '100%', 
         backgroundColor: 'white', 
         display: 'flex', 
         justifyContent: 'center', 
         alignItems: 'center', 
-        marginTop: '16px' 
+        marginTop: '24px',
+        marginBottom : '24px',
+        borderRadius : '20px',
+        boxShadow: '5px 5px  rgba(0,0,0,0.1)'
+        
       }}
     >
       <Box 
         sx={{ 
           backgroundColor: 'white', 
           width: { xs: '92vw', md: '78vw' }, 
-          height: { xs: 'auto', md: '320px' }, 
+          height: { xs: 'auto', md: '300px' }, 
           borderRadius: '10px', 
           padding: { xs: 2, md: 0 } 
         }}
       >
         <Box 
-          sx={{ height: '36px', padding: '10px' }} 
+          sx={{ height: '10px', padding: '20px', borderBottom : '1px solid grey' }} 
           display="flex" 
           justifyContent="space-between" 
           alignItems="center"
         >
           <Typography variant="h6">Theme {theme_index + 1}</Typography>
           <Box display="flex" alignItems="center" gap={1}>
+          <StarOutlineIcon />
             <Typography variant="body1">5 pts</Typography>
             <IconButton aria-label="delete">
-              <Button onClick={()=>handleDeleteTheme(theme_index)}>Delete Theme <DeleteIcon color="error" /></Button>
+              <Button color="error" size='small' variant='outlined' sx={{borderRadius : '10px'}} onClick={()=>handleDeleteTheme(theme_index)}>Delete Theme <DeleteIcon color="error" /></Button>
             </IconButton>
           </Box>
         </Box>
@@ -86,11 +93,12 @@ export default class Theme1 extends Component<Props,State> {
           <Card 
             variant="outlined" 
             sx={{ 
-              p: 2, 
+              padding : '20px',
               display: 'flex', 
               flexDirection: 'column', 
               gap: 2, 
-              width: { xs: '100%', md: '40%' } 
+              width: { xs: '100%', md: '40%' },
+              border : 'none'
             }}
           >
             <TextField fullWidth label="Title" variant="outlined" defaultValue="Planting a grape" />
