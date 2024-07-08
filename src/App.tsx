@@ -1,4 +1,5 @@
 import './App.css';
+import BuyerFilter from './BuyerFilter';
 import Main from './Components/Main';
 import NavBar from './Components/NavBar';
 import UpperNavBar from './Components/UpperNavBar';
@@ -11,7 +12,8 @@ function App() {
       {/* <UpperNavBar/> */}
       {/* <NavBar/> */}
       {/* <Main/> */}
-      <FaqTask/>
+      {/* <FaqTask/> */}
+      <BuyerFilter/>
     </div>
   );
 }
