@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import {
   Accordion,
   AccordionSummary,
@@ -53,7 +53,7 @@ class BuyerFilter extends Component<{}, State> {
     };
   }
 
-  handleAccordionChange = (panel: keyof State['expanded']) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+  handleAccordionChange = (panel: keyof State['expanded']) => (event: SyntheticEvent, isExpanded: boolean) => {
     this.setState((prevState) => ({
       expanded: {
         ...prevState.expanded,
