@@ -13,7 +13,7 @@ function App() {
       {/* <NavBar/> */}
       {/* <Main/> */}
       {/* <FaqTask/> */}
-      <BuyerFilter/>
+      {/* <BuyerFilter/> */}
     </div>
   );
 }
