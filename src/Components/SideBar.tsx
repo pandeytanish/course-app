@@ -171,8 +171,6 @@ export default class SideBar extends Component<Props, SideBarState> {
             <Box sx={{ p: 2, width: '285px', display: { xs: 'none', lg: 'flex' }, flexDirection: 'column', justifyContent: 'space-between' }}>
                 <Box sx={{ textAlign: 'left', flex: 1 }}>
                     <Typography variant='h5' sx={{ marginBottom: '20px' }}>Courses</Typography>
-                    {/* <Typography sx={{ fontSize: '14px', color: 'gray', marginBottom: '10px' }} variant='body2'>How the wine is Done</Typography> */}
-
                     <Box sx={{ paddingLeft: '18px' }}>
                         {ThemeData.map((Data, index) => (
                             <Box key={index}>
